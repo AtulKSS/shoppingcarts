@@ -3,6 +3,7 @@ package com.example.demo.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.demo.Entitity.ShoppingHIstoy;
 import com.example.demo.Entitity.Shoppingcart;
 import com.example.demo.dao.ShoppingDao;
 
@@ -29,6 +30,8 @@ public interface ShoppingcartServices {
 	public List<Integer> getPrice();
 	
 	public List<String> getAllitems();
+
+
 	
 	
 

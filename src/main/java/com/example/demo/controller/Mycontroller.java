@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.example.demo.Entitity.ShoppingHIstoy;
 import com.example.demo.Entitity.Shoppingcart;
 import com.example.demo.dao.ShoppingDao;
 import com.example.demo.services.ShoppingcartServices;
@@ -28,9 +29,10 @@ public class Mycontroller {
 	@Autowired
 	private ShoppingcartServices shoppingservices;
 	
-	@GetMapping("/showitems")
+	@GetMapping("/showitems/v1/orders/current/items")
 	public List<Shoppingcart> showitems()
 	{
+		System.out.print("HUHUHAHA");
 		return this.shoppingservices.showitems();
 	
 	}
@@ -63,19 +65,6 @@ public class Mycontroller {
 	}
 	
 
-	
-//	@GetMapping("/total")
-//	public List<Shoppingcart> getinfo();{
-//		 shoppingservices.getinfo();
-//	}
-	
-//	@GetMapping("/total")
-//	public List<Shoppingcart> getinfo(Long price) {
-//	return this.shoppingservices.getinfo(price);
-//}
-	
-
-	
 	@RequestMapping(method = RequestMethod.POST)
 	public <T> ResponseEntity<T> createCustomer(UriComponentsBuilder builder) {
 		return null;
@@ -92,7 +81,11 @@ public class Mycontroller {
 }
 	
 	
-	
-	
+	@GetMapping("/additemss/v1/orders/current/items/add")
+	public Shoppingcart additem1(@RequestBody Shoppingcart shoppingcart) {
+		System.out.print("HUHUHAHA");
+		return this.shoppingservices.additem(shoppingcart);
+		
+	}
 	
 }

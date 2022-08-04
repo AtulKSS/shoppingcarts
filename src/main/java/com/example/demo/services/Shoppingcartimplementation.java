@@ -17,8 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.Entitity.ShoppingHIstoy;
 import com.example.demo.Entitity.Shoppingcart;
 import com.example.demo.dao.ShoppingDao;
+import com.example.demo.dao.ShoppingHistoryDao;
 import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Service
@@ -180,6 +182,14 @@ public class Shoppingcartimplementation implements ShoppingcartServices {
 		List<String> priceAllitems = shoppingdao.getAllitems();
 		return priceAllitems;
 	}
+
+	@Override
+	public List<Shoppingcart> getinfo(Long price) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 //	@Override
 //	public List<String> getAllcart() {
