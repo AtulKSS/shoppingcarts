@@ -1,10 +1,12 @@
 package com.example.demo.dao;
 
-import java.util.Collection;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -26,7 +28,17 @@ public interface ShoppingDao extends JpaRepository<Shoppingcart, Long>{
 	
 	@Query(value=("SELECT item_name FROM shoppingcart"), nativeQuery=true)
 	List<String> getAllitems();
+	
+	@Transactional
+	@Modifying
+	@Query(value=("DELETE from shoppingcart"), nativeQuery=true)
+	void deletecart(Boolean price, String item_name);
+	
+
 
 }
+
+
+
 
 

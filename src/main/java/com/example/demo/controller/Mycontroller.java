@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,7 +34,6 @@ public class Mycontroller {
 	@GetMapping("/showitems/v1/orders/current/items")
 	public List<Shoppingcart> showitems()
 	{
-		System.out.print("HUHUHAHA");
 		return this.shoppingservices.showitems();
 	
 	}
@@ -83,9 +84,30 @@ public class Mycontroller {
 	
 	@GetMapping("/additemss/v1/orders/current/items/add")
 	public Shoppingcart additem1(@RequestBody Shoppingcart shoppingcart) {
-		System.out.print("HUHUHAHA");
 		return this.shoppingservices.additem(shoppingcart);
 		
 	}
+	
+	@PostMapping("/additemssss")
+	public ShoppingHIstoy additeminhis(@RequestBody ShoppingHIstoy shoppinghistory) {
+		return this.shoppingservices.additeminhis(shoppinghistory);	
+	}
+	
+	@PutMapping("/saveitems")
+	public List<String> saveitems(@RequestBody ShoppingHIstoy shoppinghistory) {
+		return this.shoppingservices.saveitems(shoppinghistory);	
+	}
+	
+	@PutMapping("/updatecart")
+	public ResponseEntity<String> updatecart() {
+		return new ResponseEntity<String>(shoppingservices.updatecart( " record(s) updated.", HttpStatus.OK));
+	}
+	
+	@PutMapping("/deletecart")
+	public ResponseEntity<String> deletecart() {
+		return new ResponseEntity<String>(shoppingservices.deletecart( " record(s) updated.", HttpStatus.OK));
+	}
+	
+	
 	
 }

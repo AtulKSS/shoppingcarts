@@ -7,36 +7,34 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Entity
-
 public class ShoppingHIstoy {
+	
+	private String customer_cart;
 	@Id
-	long customer_id;
-	private String Customer_cart;
+	long customers;
 	public ShoppingHIstoy() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ShoppingHIstoy(long customer_id, String customer_cart) {
-		super();
-		this.customer_id = customer_id;
-		Customer_cart = customer_cart;
-	}
-	public long getCustomer_id() {
-		return customer_id;
-	}
-	public void setCustomer_id(long customer_id) {
-		this.customer_id = customer_id;
-	}
 	public String getCustomer_cart() {
-		return Customer_cart;
+		return customer_cart;
 	}
 	public void setCustomer_cart(String customer_cart) {
-		Customer_cart = customer_cart;
+		this.customer_cart = customer_cart;
+	}
+	public long getCustomers() {
+		return customers;
+	}
+	public void setCustomer_id(long customers) {
+		this.customers = customers;
 	}
 	@Override
 	public String toString() {
-		return "ShoppingHIstoy [customer_id=" + customer_id + ", Customer_cart=" + Customer_cart + "]";
+		return "ShoppingHIstoy [customer_cart=" + customer_cart + ", customers=" + customers + "]";
 	}
 	
+	
 
+	
+	
 }

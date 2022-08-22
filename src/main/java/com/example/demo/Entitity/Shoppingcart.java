@@ -16,23 +16,18 @@ public class Shoppingcart {
 	@Id
 	private long price;
 	private String item_name;
-	private String customer_name;
+	
 	public Shoppingcart() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Shoppingcart(long price, String item_name, String customer_name) {
+	public Shoppingcart(long price, String item_name) {
 		super();
 		this.price = price;
 		this.item_name = item_name;
-		this.customer_name=customer_name;
+		
 	}
-	public String getCustomer_name() {
-		return customer_name;
-	}
-	public void setCustomer_name(String customer_name) {
-		this.customer_name = customer_name;
-	}
+
 	public long getPrice() {
 		return price;
 	}
@@ -47,7 +42,7 @@ public class Shoppingcart {
 	}
 	@Override
 	public String toString() {
-		return "Shoppingcart [price=" + price + ", item_name=" + item_name + ", customer_name=" + customer_name + "]";
+		return "Shoppingcart [price=" + price + ", item_name=" + item_name + "]";
 	}
 	
 	
