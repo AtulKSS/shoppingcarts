@@ -106,6 +106,7 @@ public class Shoppingcartimplementation implements ShoppingcartServices {
 		System.out.println("Total amount without GST "+sumss);
 		System.out.println("Total amount with GST "+(sumss+gstss));
 		System.out.println("Total amount with 10% discount "+lastamount);
+		System.out.print("Hope you enjoy");
 		return priceList;
 	}
 	
