@@ -19,11 +19,20 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.Entitity.AddtoCart;
+import com.example.demo.Entitity.CheckoutCart;
+import com.example.demo.Entitity.Products;
 import com.example.demo.Entitity.ShoppingHIstoy;
 import com.example.demo.Entitity.Shoppingcart;
+import com.example.demo.Entitity.User;
+import com.example.demo.Entitity.Users;
+import com.example.demo.dao.AddToCartRepo;
+import com.example.demo.dao.CheckoutRepo;
+import com.example.demo.dao.ProductRepo;
 import com.example.demo.dao.ShoppingDao;
 import com.example.demo.dao.ShoppingHdao;
 import com.example.demo.dao.ShoppingHistoryDao;
+import com.example.demo.dao.UserDao;
 import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Service
@@ -33,6 +42,21 @@ public class Shoppingcartimplementation implements ShoppingcartServices {
 	
 	@Autowired
 	private ShoppingHdao shoppinghdao;
+	
+	@Autowired
+	private UserDao userdao;
+	
+	@Autowired
+	private ProductRepo productDao;
+	
+	@Autowired
+	private CheckoutRepo checkoutrepo;
+	
+	@Autowired
+	private AddToCartRepo addtocarts;
+	
+	@Autowired
+	private CheckoutRepo checkouts;
 	
 	
 	public Shoppingcartimplementation () {
@@ -106,7 +130,7 @@ public class Shoppingcartimplementation implements ShoppingcartServices {
 		System.out.println("Total amount without GST "+sumss);
 		System.out.println("Total amount with GST "+(sumss+gstss));
 		System.out.println("Total amount with 10% discount "+lastamount);
-		System.out.print("Hope you enjoy");
+		
 		return priceList;
 	}
 	
@@ -164,6 +188,35 @@ public class Shoppingcartimplementation implements ShoppingcartServices {
 	// TODO Auto-generated method stub
 	return shoppingcart;
 		
+	}
+
+	@Override
+	public User adduser(User user) {
+		// TODO Auto-generated method stub
+	
+		userdao.save(user);
+		return user;
+	}
+
+	@Override
+	public Products addproduct(Products product) {
+		// TODO Auto-generated method stub
+		productDao.save(product);
+		return product;
+	}
+
+	@Override
+	public CheckoutCart checkout(CheckoutCart checkout) {
+		// TODO Auto-generated method stub
+		checkouts.save(checkout);
+		return checkout;
+	}
+
+	@Override
+	public AddtoCart addtocart(AddtoCart addtocart) {
+		// TODO Auto-generated method stub
+		addtocarts.save(addtocart);
+		return addtocart;
 	}
 
 

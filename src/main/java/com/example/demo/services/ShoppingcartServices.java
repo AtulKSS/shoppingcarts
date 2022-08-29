@@ -6,8 +6,13 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 
+import com.example.demo.Entitity.AddtoCart;
+import com.example.demo.Entitity.CheckoutCart;
+import com.example.demo.Entitity.Products;
 import com.example.demo.Entitity.ShoppingHIstoy;
 import com.example.demo.Entitity.Shoppingcart;
+import com.example.demo.Entitity.User;
+import com.example.demo.Entitity.Users;
 import com.example.demo.dao.ShoppingDao;
 
 public interface ShoppingcartServices {
@@ -44,6 +49,14 @@ public interface ShoppingcartServices {
 	public HttpStatus updatecart(String string, HttpStatus ok);
 
 	public HttpStatus deletecart(String string, HttpStatus ok);
+
+	public User adduser(User user);
+
+	public Products addproduct(Products product);
+
+	public CheckoutCart checkout(CheckoutCart checkout);
+
+	public AddtoCart addtocart(AddtoCart addtocart);
 
 	
 	

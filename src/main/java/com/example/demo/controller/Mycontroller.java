@@ -1,8 +1,11 @@
 package com.example.demo.controller;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +23,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.example.demo.ShoppingConfiguration;
+import com.example.demo.Entitity.AddtoCart;
+import com.example.demo.Entitity.CheckoutCart;
+import com.example.demo.Entitity.Products;
 import com.example.demo.Entitity.ShoppingHIstoy;
 import com.example.demo.Entitity.Shoppingcart;
+import com.example.demo.Entitity.User;
+import com.example.demo.Entitity.Users;
 import com.example.demo.dao.ShoppingDao;
+import com.example.demo.services.CartService;
 import com.example.demo.services.ShoppingcartServices;
+
+import io.swagger.v3.oas.models.responses.ApiResponse;
 
 @RestController
 public class Mycontroller {
 	
 	@Autowired
 	private ShoppingcartServices shoppingservices;
+	
+	@Autowired
+	private CartService cartService;
 	
 	@GetMapping("/showitems/v1/orders/current/items")
 	public List<Shoppingcart> showitems()
@@ -108,6 +123,152 @@ public class Mycontroller {
 		return new ResponseEntity<String>(shoppingservices.deletecart( " record(s) updated.", HttpStatus.OK));
 	}
 	
+	@PostMapping("/adduser")
+	public User adduser(@RequestBody User user) {
+		return this.shoppingservices.adduser(user);
+		
+	}
 	
+	@PostMapping("/addproduct")
+	public Products addproduct(@RequestBody Products product) {
+		return this.shoppingservices.addproduct(product);
+		
+	}
+	
+	@PostMapping("/checkout")
+	public CheckoutCart checkout(@RequestBody CheckoutCart checkout) {
+		return this.shoppingservices.checkout(checkout);
+		
+	}
+	
+	@PostMapping("/addtocart")
+	public AddtoCart addtocart(@RequestBody AddtoCart addtocart){
+		return this.shoppingservices.addtocart(addtocart);
+		
+	}
+//	ADDTOCART CONTROLLER 2
+	
+	@GetMapping("/addProduct")
+ 	public ResponseEntity<?> addCartwithProduct(@RequestBody HashMap<String,String> addCartRequest) {
+		try {
+			String keys[] = {"productId","userId","qty","price"};
+			if(ShoppingConfiguration.validationWithHashMap(keys, addCartRequest)) {
+				
+			}
+			long productId = Long.parseLong(addCartRequest.get("productId")); 
+			long userId =  Long.parseLong(addCartRequest.get("userId")); 
+		 	int qty =  Integer.parseInt(addCartRequest.get("qty")); 
+			double price = Double.parseDouble(addCartRequest.get("price"));
+			List<AddtoCart> obj = cartService.addCartbyUserIdAndProductId(productId,userId,qty,price);
+			return ResponseEntity.ok(obj);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.print("Try Again.......");
+			return ResponseEntity.badRequest().body(new ApiResponse());
+		}
+		
+   }
+	
+	@PostMapping("/updateQtyForCart")
+  	public ResponseEntity<?> updateQtyForCart(@RequestBody HashMap<String,String> addCartRequest) {
+		try {
+			String keys[] = {"cartId","userId","qty","price"};
+			if(ShoppingConfiguration.validationWithHashMap(keys, addCartRequest)) {
+				
+			}
+			long cartId = Long.parseLong(addCartRequest.get("cartId")); 
+			long userId =  Long.parseLong(addCartRequest.get("userId")); 
+			int qty =  Integer.parseInt(addCartRequest.get("qty")); 
+			double price = Double.parseDouble(addCartRequest.get("price"));
+			 cartService.updateQtyByCartId(cartId, qty, price);
+			 List<AddtoCart> obj = cartService.getCartByUserId(userId);
+			return ResponseEntity.ok(obj);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.badRequest().body(new ApiResponse());
+		}
+		
+   }
+	
+	@DeleteMapping("removeProductFromCart")
+  	public ResponseEntity<?> removeCartwithProductId(@RequestBody HashMap<String,String> removeCartRequest) {
+		try {
+			String keys[] = {"userId","cartId"};
+			if(ShoppingConfiguration.validationWithHashMap(keys, removeCartRequest)) {
+				
+			}
+			List<AddtoCart> obj = cartService.removeCartByUserId(Long.parseLong(removeCartRequest.get("cartId")), Long.parseLong(removeCartRequest.get("userId")));
+			return ResponseEntity.ok(obj);
+		}catch(Exception e) {
+				return ResponseEntity.badRequest().body(new ApiResponse());
+		}		
+   }
+	
+	
+	@GetMapping("getCartsByUserId")
+  	public ResponseEntity<?> getCartsByUserId(@RequestBody HashMap<String,String> getCartRequest) {
+		try {
+			String keys[] = {"userId"};
+			if(ShoppingConfiguration.validationWithHashMap(keys, getCartRequest)) {
+			}
+			List<AddtoCart> obj = cartService.getCartByUserId(Long.parseLong(getCartRequest.get("userId")));
+			return ResponseEntity.ok(obj);
+		}catch(Exception e) {
+				return ResponseEntity.badRequest().body(new ApiResponse());
+		}	
+		
+		
+   }
+	
+//	Order Controllers
+	
+	@GetMapping("/checkout_order")
+	public ResponseEntity<?> checkout_order(@RequestBody HashMap<String,String> addCartRequest) {
+		try {
+			String keys[] = {"userId","total_price","pay_type","deliveryAddress"};
+			if(ShoppingConfiguration.validationWithHashMap(keys, addCartRequest)) {
+				
+				
+			}
+			long user_Id = Long.parseLong(addCartRequest.get("userId"));
+			double total_amt = Double.parseDouble(addCartRequest.get("total_price"));
+			if(cartService.checkTotalAmountAgainstCart(total_amt,user_Id)) {
+				List<AddtoCart> cartItems = cartService.getCartByUserId(user_Id);
+				List<CheckoutCart> tmp = new ArrayList<CheckoutCart>();
+				for(AddtoCart addCart : cartItems) {
+					String orderId = ""+getOrderId();
+					CheckoutCart cart = new CheckoutCart();
+					cart.setPayment_type(addCartRequest.get("pay_type"));
+					cart.setPrice(total_amt);
+					cart.setUser_id(user_Id);
+					cart.setOrder_id(orderId);
+					cart.setProduct(addCart.getProduct());
+					cart.setQty(addCart.getQty());
+					cart.setDelivery_address(addCartRequest.get("deliveryAddress"));
+					tmp.add(cart);
+				}
+				cartService.saveProductsForCheckout(tmp);
+				return ResponseEntity.ok(new ApiResponse());
+			}else {
+				throw new Exception("Total amount is mismatch");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.badRequest().body(new ApiResponse());
+		}
+	}
+	public int getOrderId() {
+	    Random r = new Random( System.currentTimeMillis() );
+	    return 10000 + r.nextInt(20000);
+	}
+	//ERROR HERE SEE TMRW
+	
+	
+	
+	
+	
+	
+	
+		
 	
 }
