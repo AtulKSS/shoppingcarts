@@ -190,7 +190,7 @@ public class Mycontroller {
 		
    }
 	
-	@DeleteMapping("removeProductFromCart")
+	@DeleteMapping("/removeProductFromCart")
   	public ResponseEntity<?> removeCartwithProductId(@RequestBody HashMap<String,String> removeCartRequest) {
 		try {
 			String keys[] = {"userId","cartId"};
@@ -205,7 +205,7 @@ public class Mycontroller {
    }
 	
 	
-	@GetMapping("getCartsByUserId")
+	@GetMapping("/getCartsByUserId")
   	public ResponseEntity<?> getCartsByUserId(@RequestBody HashMap<String,String> getCartRequest) {
 		try {
 			String keys[] = {"userId"};
@@ -222,46 +222,17 @@ public class Mycontroller {
 	
 //	Order Controllers
 	
-	@GetMapping("/checkout_order")
-	public ResponseEntity<?> checkout_order(@RequestBody HashMap<String,String> addCartRequest) {
-		try {
-			String keys[] = {"userId","total_price","pay_type","deliveryAddress"};
-			if(ShoppingConfiguration.validationWithHashMap(keys, addCartRequest)) {
-				
-				
-			}
-			long user_Id = Long.parseLong(addCartRequest.get("userId"));
-			double total_amt = Double.parseDouble(addCartRequest.get("total_price"));
-			if(cartService.checkTotalAmountAgainstCart(total_amt,user_Id)) {
-				List<AddtoCart> cartItems = cartService.getCartByUserId(user_Id);
-				List<CheckoutCart> tmp = new ArrayList<CheckoutCart>();
-				for(AddtoCart addCart : cartItems) {
-					String orderId = ""+getOrderId();
-					CheckoutCart cart = new CheckoutCart();
-					cart.setPayment_type(addCartRequest.get("pay_type"));
-					cart.setPrice(total_amt);
-					cart.setUser_id(user_Id);
-					cart.setOrder_id(orderId);
-					cart.setProduct(addCart.getProduct());
-					cart.setQty(addCart.getQty());
-					cart.setDelivery_address(addCartRequest.get("deliveryAddress"));
-					tmp.add(cart);
-				}
-				cartService.saveProductsForCheckout(tmp);
-				return ResponseEntity.ok(new ApiResponse());
-			}else {
-				throw new Exception("Total amount is mismatch");
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.badRequest().body(new ApiResponse());
-		}
+	@GetMapping("/getOrdersByUserId")
+	public ResponseEntity<?> getOrdersByUserId(@RequestBody HashMap<String,String> ordersRequest) {
+	try {
+		String keys[] = {"userId"};	
+		return ResponseEntity.ok(new ApiResponse());
+	}catch(Exception e) {
+		e.printStackTrace();
+		return ResponseEntity.badRequest().body(new ApiResponse());
 	}
-	public int getOrderId() {
-	    Random r = new Random( System.currentTimeMillis() );
-	    return 10000 + r.nextInt(20000);
-	}
-	//ERROR HERE SEE TMRW
+	
+}
 	
 	
 	
