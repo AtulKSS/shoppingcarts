@@ -58,6 +58,9 @@ public interface ShoppingcartServices {
 
 	public AddtoCart addtocart(AddtoCart addtocart);
 
+
+	String getallusersss();
+
 	
 	
 	

@@ -218,6 +218,16 @@ public class Shoppingcartimplementation implements ShoppingcartServices {
 		addtocarts.save(addtocart);
 		return addtocart;
 	}
+	
+	@Override
+	public String getallusersss() {
+		// TODO Auto-generated method stub\
+		String getalluserss = userdao.getallusers();
+		return getalluserss;
+	}
+
+
+
 
 
 }

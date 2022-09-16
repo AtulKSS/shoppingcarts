@@ -96,6 +96,11 @@ public class Mycontroller {
 	return this.shoppingservices.getAllitems();
 }
 	
+	@GetMapping("/getallusersss")
+	public String getallusersss() {
+	return this.shoppingservices.getallusersss();
+}
+	
 	
 	@GetMapping("/additemss/v1/orders/current/items/add")
 	public Shoppingcart additem1(@RequestBody Shoppingcart shoppingcart) {
