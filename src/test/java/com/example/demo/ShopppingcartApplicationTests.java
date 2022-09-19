@@ -81,7 +81,7 @@ public class ShopppingcartApplicationTests{
 					MockHttpServletResponse response = result.getResponse();
 					String outputInJson = response.getContentAsString();
 					
-//					assertThat(outputInJson).isEqualTo(inputinJson);
+					assertThat(outputInJson).isEqualTo(inputinJson);
 					assertEquals(HttpStatus.OK.value(), response.getStatus());
 					System.out.println(inputinJson);
 					System.out.println(outputInJson+"This is outputinjson");
