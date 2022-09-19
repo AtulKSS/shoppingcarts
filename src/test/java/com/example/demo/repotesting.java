@@ -24,8 +24,8 @@ public class repotesting {
 	void getPrice() {
 		
 		
-		Boolean actualResult = shopdao.getPrice(0);
-		assertThat(actualResult).isFalse();
+		Boolean actualResult = shopdao.getPrice(45);
+		assertThat(actualResult).isTrue();
 		System.out.print(actualResult);
 	}
 	
