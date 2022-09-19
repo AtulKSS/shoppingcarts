@@ -1,5 +1,27 @@
-{"properties": [{
-  "name": "spring.jpa.hibernate.dd-auto",
-  "type": "java.lang.String",
-  "description": "A description for 'spring.jpa.hibernate.dd-auto'"
-}]}
+{"properties": [
+  {
+    "name": "spring.jpa.hibernate.dd-auto",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.jpa.hibernate.dd-auto'"
+  },
+  {
+    "name": "sonar.jdbc.username",
+    "type": "java.lang.String",
+    "description": "A description for 'sonar.jdbc.username'"
+  },
+  {
+    "name": "sonar.jdbc.password",
+    "type": "java.lang.String",
+    "description": "A description for 'sonar.jdbc.password'"
+  },
+  {
+    "name": "sonar.login",
+    "type": "java.lang.String",
+    "description": "A description for 'sonar.login'"
+  },
+  {
+    "name": "sonar.password",
+    "type": "java.lang.String",
+    "description": "A description for 'sonar.password'"
+  }
+]}

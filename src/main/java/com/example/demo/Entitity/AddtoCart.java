@@ -1,7 +1,5 @@
 package com.example.demo.Entitity;
 
-import java.beans.Transient;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

@@ -44,7 +44,7 @@ public class CartSerivceImpl implements CartService {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			logger.error("what is this aaaaaa"+e.getMessage());
+			logger.error(""+e.getMessage());
 			throw new Exception(e.getMessage());
 		}
 		
@@ -77,7 +77,7 @@ public class CartSerivceImpl implements CartService {
 		return false;
 	}
 
-
+	
 	@Override
 	public List<AddtoCart> removeAllCartByUserId(long userId) {
 		addCartRepo.deleteAllCartByUserId(userId);

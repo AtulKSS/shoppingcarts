@@ -96,6 +96,11 @@ public class Mycontroller {
 	return this.shoppingservices.getAllitems();
 }
 	
+	@GetMapping("/getallusersss")
+	public String getallusersss() {
+	return this.shoppingservices.getallusersss();
+}
+	
 	
 	@GetMapping("/additemss/v1/orders/current/items/add")
 	public Shoppingcart additem1(@RequestBody Shoppingcart shoppingcart) {
@@ -225,7 +230,6 @@ public class Mycontroller {
 	@GetMapping("/getOrdersByUserId")
 	public ResponseEntity<?> getOrdersByUserId(@RequestBody HashMap<String,String> ordersRequest) {
 	try {
-		String keys[] = {"userId"};	
 		return ResponseEntity.ok(new ApiResponse());
 	}catch(Exception e) {
 		e.printStackTrace();
