@@ -230,7 +230,6 @@ public class Mycontroller {
 	@GetMapping("/getOrdersByUserId")
 	public ResponseEntity<?> getOrdersByUserId(@RequestBody HashMap<String,String> ordersRequest) {
 	try {
-		String keys[] = {"userId"};	
 		return ResponseEntity.ok(new ApiResponse());
 	}catch(Exception e) {
 		e.printStackTrace();
