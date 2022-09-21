@@ -48,7 +48,7 @@ public class Mycontroller {
 	@Autowired
 	private CartService cartService;
 	
-	@GetMapping("/showitems/v1/orders/current/items")
+	@GetMapping("/showitems")
 	public List<Shoppingcart> showitems()
 	{
 		return this.shoppingservices.showitems();

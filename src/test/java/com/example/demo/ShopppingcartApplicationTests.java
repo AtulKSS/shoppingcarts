@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -27,6 +29,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import com.example.demo.Entitity.AddtoCart;
+import com.example.demo.Entitity.CheckoutCart;
+import com.example.demo.Entitity.Products;
 import com.example.demo.Entitity.Shoppingcart;
 import com.example.demo.Entitity.User;
 import com.example.demo.controller.Mycontroller;
@@ -62,7 +67,7 @@ public class ShopppingcartApplicationTests{
 				 private MockMvc mvc;
 				
 				@Test
-				public void testingstarts()
+				public void testAdditems()
 				
 				 throws Exception{
 					Shoppingcart mockG = new Shoppingcart();
@@ -75,7 +80,7 @@ public class ShopppingcartApplicationTests{
 					
 					String URI = "/additemss";
 					Mockito.when(servicess.additem(Mockito.any(Shoppingcart.class))).thenReturn(mockG);
-					RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/additemss")
+					RequestBuilder requestBuilder = MockMvcRequestBuilders.post(URI)
 							.accept(MediaType.APPLICATION_JSON).content(inputinJson).contentType(MediaType.APPLICATION_JSON);
 					
 					MvcResult result = mvc.perform(requestBuilder).andReturn();
@@ -97,7 +102,7 @@ public class ShopppingcartApplicationTests{
 				}
 				
 				@Test
-				public void test2()
+				public void testadduser()
 				throws Exception{
 					
 					User mockG = new User();
@@ -129,6 +134,146 @@ public class ShopppingcartApplicationTests{
 					
 					
 				}
+				
+				@Test
+				public void testAddtoCart()
+				throws Exception{
+					
+					AddtoCart mockG = new AddtoCart();
+					mockG.setId(13);
+					mockG.setPrice(456);
+					mockG.setProduct(null);
+					mockG.setQty(5);
+					mockG.setAdded_date(null);
+					mockG.setUser_id(null);
+				
+				
+					
+					String inputinJson = this.mapToJson(mockG);
+					
+					String URI = "/addtocart";
+					Mockito.when(servicess.addtocart(Mockito.any(AddtoCart.class))).thenReturn(mockG);
+					RequestBuilder requestBuilder = MockMvcRequestBuilders.post(URI)
+							.accept(MediaType.APPLICATION_JSON).content(inputinJson).contentType(MediaType.APPLICATION_JSON);
+					
+					MvcResult result = mvc.perform(requestBuilder).andReturn();
+					MockHttpServletResponse response = result.getResponse();
+					String outputInJson = response.getContentAsString();
+					
+					assertThat(outputInJson).isEqualTo(inputinJson);
+					assertEquals(HttpStatus.OK.value(), response.getStatus());
+					
+					
+				}
+				
+				@Test
+				public void testingtoget()
+				
+				 throws Exception{
+					Shoppingcart mockG = new Shoppingcart();
+					mockG.setItem_name("Chana daal");
+					mockG.setPrice(34);
+					
+					
+					Shoppingcart mockG1 = new Shoppingcart();
+					mockG1.setItem_name("MILKs");
+					mockG1.setPrice(455);
+				
+					
+					List<Shoppingcart> showitemsss = new ArrayList<>();
+					showitemsss.add(mockG);
+					showitemsss.add(mockG1);
+
+					Mockito.when(servicess.showitems()).thenReturn(showitemsss);					
+					String URI = "/showitems";
+					
+					RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
+							URI).accept(
+									MediaType.APPLICATION_JSON);
+					
+					MvcResult result = mvc.perform(requestBuilder).andReturn();
+					
+					String expectedJson = this.mapToJson(showitemsss);
+					String outputInJson1 = result.getResponse().getContentAsString();
+					assertThat(outputInJson1).isEqualTo(expectedJson);
+					System.out.println(expectedJson);
+					System.out.println(outputInJson1+"This is outputinjson of get method");
+
+					System.out.println(result.getResponse()+"This is Result");
+					
+				}
+				
+				@Test
+				public void testAddproduct()
+				throws Exception{
+					
+					Products mockG = new Products();
+					mockG.setId(13);
+					mockG.setAdded_on(null);
+					mockG.setName("Bread");
+					mockG.setPrice(null);
+					mockG.setCategory_id(null);
+					
+				
+				
+					
+					String inputinJson = this.mapToJson(mockG);
+					
+					String URI = "/addproduct";
+					Mockito.when(servicess.addproduct(Mockito.any(Products.class))).thenReturn(mockG);
+					RequestBuilder requestBuilder = MockMvcRequestBuilders.post(URI)
+							.accept(MediaType.APPLICATION_JSON).content(inputinJson).contentType(MediaType.APPLICATION_JSON);
+					
+					MvcResult result = mvc.perform(requestBuilder).andReturn();
+					MockHttpServletResponse response = result.getResponse();
+					String outputInJson = response.getContentAsString();
+					
+					assertThat(outputInJson).isEqualTo(inputinJson);
+					assertEquals(HttpStatus.OK.value(), response.getStatus());
+					
+					
+				}
+				
+				
+				@Test
+				public void testCheckout()
+				throws Exception{
+					
+					CheckoutCart mockG = new CheckoutCart();
+					mockG.setId(13);
+					mockG.setDelivery_address("PUNE MAHANAGAR");
+					mockG.setOrder_date(null);
+					mockG.setProduct(null);
+					mockG.setQty(4);
+					mockG.setUser_id(54);
+					mockG.setPrice(456);
+					mockG.setOrder_date("21-09-2022");
+					mockG.setPayment_type("Cash");
+				
+					
+				
+				
+					
+					String inputinJson = this.mapToJson(mockG);
+					
+					String URI = "/checkout";
+					Mockito.when(servicess.checkout(Mockito.any(CheckoutCart.class))).thenReturn(mockG);
+					RequestBuilder requestBuilder = MockMvcRequestBuilders.post(URI)
+							.accept(MediaType.APPLICATION_JSON).content(inputinJson).contentType(MediaType.APPLICATION_JSON);
+					
+					MvcResult result = mvc.perform(requestBuilder).andReturn();
+					MockHttpServletResponse response = result.getResponse();
+					String outputInJson = response.getContentAsString();
+					
+					assertThat(outputInJson).isEqualTo(inputinJson);
+					assertEquals(HttpStatus.OK.value(), response.getStatus());
+					
+					
+				}
+				
+				
+				
+				
 				
 				@Test
 				void getAlluserss() {

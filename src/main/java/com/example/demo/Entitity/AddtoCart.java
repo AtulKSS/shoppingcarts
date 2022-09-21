@@ -67,7 +67,7 @@ public class AddtoCart {
 		this.product = product;
 	}
 
-	public String getProductName() {
-		return product.getName();
-	}
+//	public String getProductName() {
+//		return product.getName();
+//	}
 }
