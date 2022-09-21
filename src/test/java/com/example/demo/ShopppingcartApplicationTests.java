@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 import org.aspectj.apache.bcel.Repository;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -40,16 +41,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(value=Mycontroller.class, useDefaultFilters = false)
-
-//@SpringBootTest
+//@WebMvcTest(value=Mycontroller.class, useDefaultFilters = false)
+@AutoConfigureMockMvc
+@SpringBootTest
 public class ShopppingcartApplicationTests{
 				
-				@MockBean
+				@Mock
 				private Shoppingcartimplementation servicess;
 				
-				@Autowired
-				private ShoppingcartServices services;
+//				@Autowired
+//				private ShoppingcartServices services;
 				
 //				@Autowired
 //				private UserDao userdaoaa;
@@ -74,7 +75,7 @@ public class ShopppingcartApplicationTests{
 					
 					String URI = "/additemss";
 					Mockito.when(servicess.additem(Mockito.any(Shoppingcart.class))).thenReturn(mockG);
-					RequestBuilder requestBuilder = MockMvcRequestBuilders.post(URI)
+					RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/additemss")
 							.accept(MediaType.APPLICATION_JSON).content(inputinJson).contentType(MediaType.APPLICATION_JSON);
 					
 					MvcResult result = mvc.perform(requestBuilder).andReturn();
