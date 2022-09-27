@@ -93,7 +93,7 @@ public class Mycontroller {
 	public List<Integer> getPrice() {
 	return this.shoppingservices.getPrice();
 }
-	@GetMapping("/allitems")
+	@GetMapping(value = "/allitems" , consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<String> getAllitems() {
 	return this.shoppingservices.getAllitems();
 }

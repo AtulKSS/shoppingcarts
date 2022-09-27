@@ -17,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -49,6 +50,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 //@WebMvcTest(value=Mycontroller.class, useDefaultFilters = false)
 @AutoConfigureMockMvc
 @SpringBootTest
+
 public class ShopppingcartApplicationTests{
 				
 				@Mock
@@ -65,6 +67,8 @@ public class ShopppingcartApplicationTests{
 				
 				 @Autowired
 				 private MockMvc mvc;
+				 
+	//TESTING CONTROLLER
 				
 				@Test
 				public void testAdditems()
@@ -270,27 +274,91 @@ public class ShopppingcartApplicationTests{
 					
 					
 				}
-				
-				
-				
-				
-				
+				//Testing to for Get method, Getting a list of String from database
 				@Test
-				void getAlluserss() {
-					servicess.showitems();
-					verify(servicess).showitems();
-				}
+				public void testinggetallitem() throws Exception {
+					 List<String> mockG=new ArrayList<String>();  
+					 mockG.add("Chana daal");
+					 mockG.add("MILKs");
 				
-				@Test
-				public void testnew() {
-					Shoppingcart mockGs = new Shoppingcart();
-					mockGs.setItem_name("helo");
-					mockGs.setPrice(34);
+					 String inputinJson = this.mapToJson(mockG);
 					
-					assertEquals(mockGs.getPrice(), mockGs.getPrice());
+					Mockito.when(servicess.getAllitems()).thenReturn(mockG);
 					
+					String URI = "/allitems";
 					
-				}
+					RequestBuilder requestBuilder = MockMvcRequestBuilders.get(URI)
+							.accept(MediaType.APPLICATION_JSON).content(inputinJson).contentType(MediaType.APPLICATION_JSON);
+					
 
+					MvcResult result = mvc.perform(requestBuilder).andReturn();
+					MockHttpServletResponse response = result.getResponse();
+//					String outputInJson = result.getResponse().getContentAsString();
+					assertEquals(HttpStatus.OK.value(), response.getStatus());
+					
+									
+			
+				
+				}
+				
+				@Test
+				public void testingapi() throws Exception {
+					 List<String> mockG=new ArrayList<String>();  
+					 mockG.add("Chana daal");
+					 mockG.add("MILKs");
+				
+					 String inputinJson = this.mapToJson(mockG);
+					
+					Mockito.when(servicess.getAllitems()).thenReturn(mockG);
+					
+					String URI = "/allitems";
+					
+					RequestBuilder requestBuilder = MockMvcRequestBuilders.get(URI)
+							.accept(MediaType.APPLICATION_JSON).content(inputinJson).contentType(MediaType.APPLICATION_JSON);
+					
+
+					MvcResult result = mvc.perform(requestBuilder).andReturn();
+					MockHttpServletResponse response = result.getResponse();
+//					String outputInJson = result.getResponse().getContentAsString();
+					assertEquals(HttpStatus.OK.value(), response.getStatus());
+					
+									
+			
+				
+				}
+				
+				@Test
+				public void testingapi2() throws Exception {
+					 List<String> mockG=new ArrayList<String>();  
+					
+				
+					 String inputinJson = this.mapToJson(mockG);
+					
+					Mockito.when(servicess.getsingleitem(34)).thenReturn(null);
+					
+					String URI = "/additemss/34";
+					
+					RequestBuilder requestBuilder = MockMvcRequestBuilders.get(URI)
+							.accept(MediaType.APPLICATION_JSON).content(inputinJson).contentType(MediaType.APPLICATION_JSON);
+					
+
+					MvcResult result = mvc.perform(requestBuilder).andReturn();
+					MockHttpServletResponse response = result.getResponse();
+//					String outputInJson = result.getResponse().getContentAsString();
+					assertEquals(HttpStatus.OK.value(), response.getStatus());
+					
+									
+			
+				
+				}
+				
+				
+				
+				
+				
+		//TESTING DAO
+				
+				
+				
 
 }
