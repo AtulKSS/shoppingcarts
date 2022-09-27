@@ -47,7 +47,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 
 @RunWith(SpringRunner.class)
-//@WebMvcTest(value=Mycontroller.class, useDefaultFilters = false)
 @AutoConfigureMockMvc
 @SpringBootTest
 
@@ -56,14 +55,6 @@ public class ShopppingcartApplicationTests{
 				@Mock
 				private Shoppingcartimplementation servicess;
 				
-//				@Autowired
-//				private ShoppingcartServices services;
-				
-//				@Autowired
-//				private UserDao userdaoaa;
-//				
-//				@Autowired
-//				private Shoppingcart carttest;
 				
 				 @Autowired
 				 private MockMvc mvc;
@@ -77,9 +68,6 @@ public class ShopppingcartApplicationTests{
 					Shoppingcart mockG = new Shoppingcart();
 					mockG.setItem_name("MILKs");
 					mockG.setPrice(455);
-				
-					
-				
 					String inputinJson = this.mapToJson(mockG);
 					
 					String URI = "/additemss";
@@ -92,13 +80,8 @@ public class ShopppingcartApplicationTests{
 					String outputInJson = response.getContentAsString();
 					
 					assertThat(outputInJson).isEqualTo(inputinJson);
-					assertEquals(HttpStatus.OK.value(), response.getStatus());
-					System.out.println(inputinJson);
-					System.out.println(outputInJson+"This is outputinjson");
-					System.out.println(response.getContentAsString()+"This is Response");
-					System.out.println(result.getResponse()+"This is Result");
-					
-				}
+					assertEquals(HttpStatus.OK.value(), response.getStatus());		
+			}
 				
 				private String mapToJson(Object object) throws JsonProcessingException{
 					ObjectMapper objectmapper = new ObjectMapper();
@@ -120,8 +103,6 @@ public class ShopppingcartApplicationTests{
 					mockG.setType(null);
 					mockG.setLogin_token(null);
 					mockG.setCreated_at(null);
-				
-					
 					String inputinJson = this.mapToJson(mockG);
 					
 					String URI = "/adduser";
@@ -135,8 +116,6 @@ public class ShopppingcartApplicationTests{
 					
 					assertThat(outputInJson).isEqualTo(inputinJson);
 					assertEquals(HttpStatus.OK.value(), response.getStatus());
-					
-					
 				}
 				
 				@Test
@@ -150,9 +129,6 @@ public class ShopppingcartApplicationTests{
 					mockG.setQty(5);
 					mockG.setAdded_date(null);
 					mockG.setUser_id(null);
-				
-				
-					
 					String inputinJson = this.mapToJson(mockG);
 					
 					String URI = "/addtocart";
@@ -163,7 +139,7 @@ public class ShopppingcartApplicationTests{
 					MvcResult result = mvc.perform(requestBuilder).andReturn();
 					MockHttpServletResponse response = result.getResponse();
 					String outputInJson = response.getContentAsString();
-					
+				
 					assertThat(outputInJson).isEqualTo(inputinJson);
 					assertEquals(HttpStatus.OK.value(), response.getStatus());
 					
@@ -178,12 +154,9 @@ public class ShopppingcartApplicationTests{
 					mockG.setItem_name("Chana daal");
 					mockG.setPrice(34);
 					
-					
 					Shoppingcart mockG1 = new Shoppingcart();
 					mockG1.setItem_name("MILKs");
 					mockG1.setPrice(455);
-				
-					
 					List<Shoppingcart> showitemsss = new ArrayList<>();
 					showitemsss.add(mockG);
 					showitemsss.add(mockG1);
@@ -194,17 +167,10 @@ public class ShopppingcartApplicationTests{
 					RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
 							URI).accept(
 									MediaType.APPLICATION_JSON);
-					
 					MvcResult result = mvc.perform(requestBuilder).andReturn();
-					
 					String expectedJson = this.mapToJson(showitemsss);
 					String outputInJson1 = result.getResponse().getContentAsString();
 					assertThat(outputInJson1).isEqualTo(expectedJson);
-					System.out.println(expectedJson);
-					System.out.println(outputInJson1+"This is outputinjson of get method");
-
-					System.out.println(result.getResponse()+"This is Result");
-					
 				}
 				
 				@Test
@@ -217,10 +183,6 @@ public class ShopppingcartApplicationTests{
 					mockG.setName("Bread");
 					mockG.setPrice(null);
 					mockG.setCategory_id(null);
-					
-				
-				
-					
 					String inputinJson = this.mapToJson(mockG);
 					
 					String URI = "/addproduct";
@@ -234,15 +196,12 @@ public class ShopppingcartApplicationTests{
 					
 					assertThat(outputInJson).isEqualTo(inputinJson);
 					assertEquals(HttpStatus.OK.value(), response.getStatus());
-					
-					
 				}
 				
 				
 				@Test
 				public void testCheckout()
 				throws Exception{
-					
 					CheckoutCart mockG = new CheckoutCart();
 					mockG.setId(13);
 					mockG.setDelivery_address("PUNE MAHANAGAR");
@@ -253,11 +212,6 @@ public class ShopppingcartApplicationTests{
 					mockG.setPrice(456);
 					mockG.setOrder_date("21-09-2022");
 					mockG.setPayment_type("Cash");
-				
-					
-				
-				
-					
 					String inputinJson = this.mapToJson(mockG);
 					
 					String URI = "/checkout";
@@ -271,8 +225,6 @@ public class ShopppingcartApplicationTests{
 					
 					assertThat(outputInJson).isEqualTo(inputinJson);
 					assertEquals(HttpStatus.OK.value(), response.getStatus());
-					
-					
 				}
 				//Testing to for Get method, Getting a list of String from database
 				@Test
@@ -280,25 +232,15 @@ public class ShopppingcartApplicationTests{
 					 List<String> mockG=new ArrayList<String>();  
 					 mockG.add("Chana daal");
 					 mockG.add("MILKs");
-				
-					 String inputinJson = this.mapToJson(mockG);
-					
-					Mockito.when(servicess.getAllitems()).thenReturn(mockG);
-					
+		
+					String inputinJson = this.mapToJson(mockG);		
+					Mockito.when(servicess.getAllitems()).thenReturn(mockG);		
 					String URI = "/allitems";
-					
 					RequestBuilder requestBuilder = MockMvcRequestBuilders.get(URI)
 							.accept(MediaType.APPLICATION_JSON).content(inputinJson).contentType(MediaType.APPLICATION_JSON);
-					
-
 					MvcResult result = mvc.perform(requestBuilder).andReturn();
 					MockHttpServletResponse response = result.getResponse();
-//					String outputInJson = result.getResponse().getContentAsString();
 					assertEquals(HttpStatus.OK.value(), response.getStatus());
-					
-									
-			
-				
 				}
 				
 				@Test
@@ -319,12 +261,7 @@ public class ShopppingcartApplicationTests{
 
 					MvcResult result = mvc.perform(requestBuilder).andReturn();
 					MockHttpServletResponse response = result.getResponse();
-//					String outputInJson = result.getResponse().getContentAsString();
 					assertEquals(HttpStatus.OK.value(), response.getStatus());
-					
-									
-			
-				
 				}
 				
 				@Test
@@ -340,21 +277,14 @@ public class ShopppingcartApplicationTests{
 					
 					RequestBuilder requestBuilder = MockMvcRequestBuilders.get(URI)
 							.accept(MediaType.APPLICATION_JSON).content(inputinJson).contentType(MediaType.APPLICATION_JSON);
-					
-
+				
 					MvcResult result = mvc.perform(requestBuilder).andReturn();
 					MockHttpServletResponse response = result.getResponse();
-//					String outputInJson = result.getResponse().getContentAsString();
-					assertEquals(HttpStatus.OK.value(), response.getStatus());
-					
-									
-			
-				
+					assertEquals(HttpStatus.OK.value(), response.getStatus());				
 				}
 				
 				
-				
-				
+
 				
 		//TESTING DAO
 				
