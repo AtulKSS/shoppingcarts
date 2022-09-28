@@ -35,7 +35,7 @@ public interface ShoppingcartServices {
 	
 	public List<String> getAllitems();
 
-	public HttpStatus updatecart(String string, HttpStatus ok);
+
 
 	public HttpStatus deletecart(String string, HttpStatus ok);
 

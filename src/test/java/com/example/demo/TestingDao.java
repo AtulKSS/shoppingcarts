@@ -28,26 +28,7 @@ public class TestingDao {
 	private UserDao userdao;
 	
 	
-	@Test
-	public void testCreateTicket(){
 
-		User mockG = new User();
-		mockG.setId(13);
-		mockG.setAddress("PUNE");
-		mockG.setEmail("email@gmail.com");
-		mockG.setIs_email_verified("Yes");
-		mockG.setMobile("9504034313");
-		mockG.setPassword("1234");
-		mockG.setName("Atul");
-		mockG.setType(null);
-		mockG.setLogin_token(null);
-		mockG.setCreated_at(null);
-		
-	    Mockito.when(userdao.save(mockG)).thenReturn(mockG);
-	    
-	    assertThat(servicess.adduser(mockG)).isEqualTo(mockG);
-	
-	}
 	
 
 	

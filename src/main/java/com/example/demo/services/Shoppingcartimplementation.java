@@ -129,15 +129,6 @@ public class Shoppingcartimplementation implements ShoppingcartServices {
 	}
 	
 
-	@Override
-	public HttpStatus updatecart(String string, HttpStatus ok) {
-		HttpStatus shoppinghistory = ok;
-		shoppinghdao.updatecart(true, "erfeefsfe");
-	// TODO Auto-generated method stub
-	return shoppinghistory;
-}
-
-
 	
 	@Override
 	public HttpStatus deletecart(String string, HttpStatus ok) {

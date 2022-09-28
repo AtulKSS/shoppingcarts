@@ -99,11 +99,7 @@ public class Mycontroller {
 }
 	
 	
-	@PutMapping("/updatecart")
-	public ResponseEntity<String> updatecart() {
-		return new ResponseEntity<String>(shoppingservices.updatecart( " record(s) updated.", HttpStatus.OK));
-	}
-	
+
 	@PutMapping("/deletecart")
 	public ResponseEntity<String> deletecart() {
 		return new ResponseEntity<String>(shoppingservices.deletecart( " record(s) updated.", HttpStatus.OK));

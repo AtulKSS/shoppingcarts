@@ -99,6 +99,12 @@ public class ShopppingcartApplicationTests{
 					return objectmapper.writeValueAsString(object);
 				}
 				
+				//TESTING FOR PUT METHOD
+				
+				
+				
+				
+				
 				@Test
 				public void testadduser()
 				throws Exception{
@@ -124,8 +130,7 @@ public class ShopppingcartApplicationTests{
 					MvcResult result = mvc.perform(requestBuilder).andReturn();
 					MockHttpServletResponse response = result.getResponse();
 					String outputInJson = response.getContentAsString();
-//				
-//					assertThat(outputInJson).isEqualTo(inputinJson);
+
 					assertEquals(HttpStatus.OK.value(), response.getStatus());
 				}
 				
@@ -375,7 +380,7 @@ public class ShopppingcartApplicationTests{
 
 					MvcResult result = mvc.perform(requestBuilder).andReturn();
 					MockHttpServletResponse response = result.getResponse();
-					assertEquals(HttpStatus.OK.value(), response.getStatus());
+					assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
 				}
 				
 				@Test
@@ -395,7 +400,7 @@ public class ShopppingcartApplicationTests{
 
 					MvcResult result = mvc.perform(requestBuilder).andReturn();
 					MockHttpServletResponse response = result.getResponse();
-					assertEquals(HttpStatus.OK.value(), response.getStatus());
+					assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
 				}
 				
 				@Test
@@ -415,21 +420,29 @@ public class ShopppingcartApplicationTests{
 
 					MvcResult result = mvc.perform(requestBuilder).andReturn();
 					MockHttpServletResponse response = result.getResponse();
-					assertEquals(HttpStatus.OK.value(), response.getStatus());	
+					assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());	
 				}
 				
-//				@Test
-//				public void testCreateTicket(){
-//
-//					Shoppingcart mock = new Shoppingcart();
-//					mock.setItem_name("Jam");
-//					
-//					
-//				    Mockito.when(userDao.save(mock)).thenReturn(mock);
-//				    
-//				    assertThat(servicess.additem(mock)).isEqualTo(mock);
-//				
-//				}
+				@Test
+				public void testingDAO(){
+
+					User mockG = new User();
+					mockG.setId(13);
+					mockG.setAddress("PUNE");
+					mockG.setEmail("email@gmail.com");
+					mockG.setIs_email_verified("Yes");
+					mockG.setMobile("9504034313");
+					mockG.setPassword("1234");
+					mockG.setName("Atul");
+					mockG.setType(null);
+					mockG.setLogin_token(null);
+					mockG.setCreated_at(null);
+					
+				    Mockito.when(userDao.save(mockG)).thenReturn(mockG);
+				    
+				    assertThat(servicess.adduser(mockG)).isEqualTo(mockG);
+				
+				}
 				
 	
 				
