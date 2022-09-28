@@ -27,10 +27,6 @@ public interface ShoppingcartServices {
 	
 	public void removeitem(long itemID);
 
-	public long sumitems();
-	
-//	public List<Shoppingcart> getinfo();
-
 	public List<Shoppingcart> getinfo(Long price);
 
 	public Object getUserFullName();
@@ -39,13 +35,6 @@ public interface ShoppingcartServices {
 	
 	public List<String> getAllitems();
 
-	public ShoppingHIstoy additeminhis(ShoppingHIstoy shoppinghistory);
-	
-//	public ShoppingHIstoy saveitems(ShoppingHIstoy shoppinghistory);
-
-	public List<String> saveitems(ShoppingHIstoy shoppinghistory);
-
-
 	public HttpStatus updatecart(String string, HttpStatus ok);
 
 	public HttpStatus deletecart(String string, HttpStatus ok);
@@ -53,8 +42,6 @@ public interface ShoppingcartServices {
 	public User adduser(User user);
 
 	public Products addproduct(Products product);
-
-	public CheckoutCart checkout(CheckoutCart checkout);
 
 	public AddtoCart addtocart(AddtoCart addtocart);
 

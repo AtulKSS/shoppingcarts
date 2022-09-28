@@ -77,11 +77,6 @@ public class Mycontroller {
 		}
 	}
 	
-	@GetMapping("/totalitems")
-	public long sumitems() {
-		return (long) this.shoppingservices.sumitems();
-	}
-	
 
 	@RequestMapping(method = RequestMethod.POST)
 	public <T> ResponseEntity<T> createCustomer(UriComponentsBuilder builder) {
@@ -104,22 +99,6 @@ public class Mycontroller {
 }
 	
 	
-	@GetMapping("/additemss/v1/orders/current/items/add")
-	public Shoppingcart additem1(@RequestBody Shoppingcart shoppingcart) {
-		return this.shoppingservices.additem(shoppingcart);
-		
-	}
-	
-	@PostMapping("/additemssss")
-	public ShoppingHIstoy additeminhis(@RequestBody ShoppingHIstoy shoppinghistory) {
-		return this.shoppingservices.additeminhis(shoppinghistory);	
-	}
-	
-	@PutMapping("/saveitems")
-	public List<String> saveitems(@RequestBody ShoppingHIstoy shoppinghistory) {
-		return this.shoppingservices.saveitems(shoppinghistory);	
-	}
-	
 	@PutMapping("/updatecart")
 	public ResponseEntity<String> updatecart() {
 		return new ResponseEntity<String>(shoppingservices.updatecart( " record(s) updated.", HttpStatus.OK));
@@ -141,13 +120,7 @@ public class Mycontroller {
 		return this.shoppingservices.addproduct(product);
 		
 	}
-	
-	@PostMapping("/checkout")
-	public CheckoutCart checkout(@RequestBody CheckoutCart checkout) {
-		return this.shoppingservices.checkout(checkout);
 		
-	}
-	
 	@PostMapping("/addtocart")
 	public AddtoCart addtocart(@RequestBody AddtoCart addtocart){
 		return this.shoppingservices.addtocart(addtocart);

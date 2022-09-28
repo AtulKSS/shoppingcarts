@@ -24,8 +24,8 @@ public interface ShoppingDao extends JpaRepository<Shoppingcart, Long>{
 	List<Object[]> getUserFullNameById(@Param("price") String price);
     
 	@Query(value=("SELECT price FROM shoppingcart"), nativeQuery=true)
-//	List<Integer> getPrice();
-	Boolean getPrice(int price);
+	List<Integer> getPrice();
+//	Boolean getPrice(int price);
 	
 	@Query(value=("SELECT item_name FROM shoppingcart"), nativeQuery=true)
 	List<String> getAllitems();

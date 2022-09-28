@@ -20,18 +20,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Entitity.AddtoCart;
-import com.example.demo.Entitity.CheckoutCart;
+//import com.example.demo.Entitity.CheckoutCart;
 import com.example.demo.Entitity.Products;
-import com.example.demo.Entitity.ShoppingHIstoy;
+//import com.example.demo.Entitity.ShoppingHIstoy;
 import com.example.demo.Entitity.Shoppingcart;
 import com.example.demo.Entitity.User;
-import com.example.demo.Entitity.Users;
+//import com.example.demo.Entitity.Users;
 import com.example.demo.dao.AddToCartRepo;
-import com.example.demo.dao.CheckoutRepo;
 import com.example.demo.dao.ProductRepo;
 import com.example.demo.dao.ShoppingDao;
-import com.example.demo.dao.ShoppingHdao;
-import com.example.demo.dao.ShoppingHistoryDao;
+
 import com.example.demo.dao.UserDao;
 import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -40,9 +38,7 @@ public class Shoppingcartimplementation implements ShoppingcartServices {
 	@Autowired
 	private ShoppingDao shoppingdao;
 	
-	@Autowired
-	private ShoppingHdao shoppinghdao;
-	
+
 	@Autowired
 	private UserDao userdao;
 	
@@ -50,13 +46,9 @@ public class Shoppingcartimplementation implements ShoppingcartServices {
 	private ProductRepo productDao;
 	
 	@Autowired
-	private CheckoutRepo checkoutrepo;
-	
-	@Autowired
 	private AddToCartRepo addtocarts;
 	
-	@Autowired
-	private CheckoutRepo checkouts;
+	
 	
 	
 	public Shoppingcartimplementation () {
@@ -93,18 +85,6 @@ public class Shoppingcartimplementation implements ShoppingcartServices {
 		Shoppingcart entity = shoppingdao.getReferenceById(parseLong);
 		shoppingdao.delete(entity);
 	}
-
-	@Override
-	public long sumitems() {
-		// TODO Auto-generated method stub
-		return shoppingdao.count();
-	}
-
-//	@Override
-//	public List<Shoppingcart> getinfo() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 
 	@Override
@@ -148,24 +128,6 @@ public class Shoppingcartimplementation implements ShoppingcartServices {
 		return null;
 	}
 	
-	@Override
-	public ShoppingHIstoy additeminhis(ShoppingHIstoy shoppinghistory) {
-		List<String> priceAllitemss = shoppinghdao.addallitemsincart();
-		shoppinghdao.save(shoppinghistory);
-		
-		return shoppinghistory;
-	}
-	
-//	@Override
-//	public ShoppingHIstoy saveitems(ShoppingHIstoy shoppinghistory) {
-//		// TODO Auto-generated method stub
-//		List<String> carthistoy = shoppinghdao.saveitems();
-//		System.out.println(carthistoy);
-//		return shoppinghistory;
-//	}
-	
-
-
 
 	@Override
 	public HttpStatus updatecart(String string, HttpStatus ok) {
@@ -175,11 +137,7 @@ public class Shoppingcartimplementation implements ShoppingcartServices {
 	return shoppinghistory;
 }
 
-	@Override
-	public List<String> saveitems(ShoppingHIstoy shoppinghistory) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	
 	@Override
 	public HttpStatus deletecart(String string, HttpStatus ok) {
@@ -191,11 +149,8 @@ public class Shoppingcartimplementation implements ShoppingcartServices {
 	}
 
 	@Override
-	public User adduser(User user) {
-		// TODO Auto-generated method stub
-	
-		userdao.save(user);
-		return user;
+	public User adduser(User user) {	
+		return userdao.save(user);
 	}
 
 	@Override
@@ -205,12 +160,7 @@ public class Shoppingcartimplementation implements ShoppingcartServices {
 		return product;
 	}
 
-	@Override
-	public CheckoutCart checkout(CheckoutCart checkout) {
-		// TODO Auto-generated method stub
-		checkouts.save(checkout);
-		return checkout;
-	}
+
 
 	@Override
 	public AddtoCart addtocart(AddtoCart addtocart) {
