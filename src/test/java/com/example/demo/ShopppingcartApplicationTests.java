@@ -3,25 +3,14 @@ package com.example.demo;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import org.aspectj.apache.bcel.Repository;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
@@ -33,22 +22,20 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.example.demo.Entitity.AddtoCart;
-import com.example.demo.Entitity.CheckoutCart;
+
 import com.example.demo.Entitity.Products;
 import com.example.demo.Entitity.Shoppingcart;
 import com.example.demo.Entitity.User;
-import com.example.demo.controller.Mycontroller;
 import com.example.demo.dao.AddToCartRepo;
+import com.example.demo.dao.ShoppingDao;
 import com.example.demo.dao.UserDao;
 import com.example.demo.services.CartService;
-import com.example.demo.services.ShoppingcartServices;
 import com.example.demo.services.Shoppingcartimplementation;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 import org.springframework.test.context.junit4.SpringRunner;
-
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
@@ -69,6 +56,12 @@ public class ShopppingcartApplicationTests{
 				
 				@MockBean
 				private AddToCartRepo addtocartrepo;
+				
+			
+			
+				
+				@Autowired
+				private ShoppingDao shoppingdao;
 				 
 	//TESTING CONTROLLER
 				
@@ -319,9 +312,7 @@ public class ShopppingcartApplicationTests{
 					
 				
 					 String inputinJson = this.mapToJson(mockG);
-					
-//					Mockito.when(servicess.removeitem(5)).thenReturn(mockG);
-					
+										
 					String URI = "/additemss/1";
 					
 					RequestBuilder requestBuilder = MockMvcRequestBuilders.delete(URI)
@@ -350,19 +341,7 @@ public class ShopppingcartApplicationTests{
 					MockHttpServletResponse response = result.getResponse();
 					assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getStatus());				
 				}
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+							
 				@Test
 				public void testingss() throws Exception {
 					 List<String> mockG=new ArrayList<String>();  
@@ -380,7 +359,7 @@ public class ShopppingcartApplicationTests{
 
 					MvcResult result = mvc.perform(requestBuilder).andReturn();
 					MockHttpServletResponse response = result.getResponse();
-					assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
+					assertEquals(HttpStatus.OK.value(), response.getStatus());
 				}
 				
 				@Test
@@ -400,7 +379,7 @@ public class ShopppingcartApplicationTests{
 
 					MvcResult result = mvc.perform(requestBuilder).andReturn();
 					MockHttpServletResponse response = result.getResponse();
-					assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
+					assertEquals(HttpStatus.OK.value(), response.getStatus());
 				}
 				
 				@Test
@@ -420,41 +399,7 @@ public class ShopppingcartApplicationTests{
 
 					MvcResult result = mvc.perform(requestBuilder).andReturn();
 					MockHttpServletResponse response = result.getResponse();
-					assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());	
+					assertEquals(HttpStatus.OK.value(), response.getStatus());	
 				}
-				
-				@Test
-				public void testingDAO(){
-
-					User mockG = new User();
-					mockG.setId(13);
-					mockG.setAddress("PUNE");
-					mockG.setEmail("email@gmail.com");
-					mockG.setIs_email_verified("Yes");
-					mockG.setMobile("9504034313");
-					mockG.setPassword("1234");
-					mockG.setName("Atul");
-					mockG.setType(null);
-					mockG.setLogin_token(null);
-					mockG.setCreated_at(null);
-					
-				    Mockito.when(userDao.save(mockG)).thenReturn(mockG);
-				    
-				    assertThat(servicess.adduser(mockG)).isEqualTo(mockG);
-				
-				}
-				
 	
-				
-								
-		//TESTING SERVICES
-				
-				
-				
-	
-				
-		
-				
-				
-
 }

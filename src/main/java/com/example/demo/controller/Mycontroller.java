@@ -1,15 +1,9 @@
 package com.example.demo.controller;
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,13 +21,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.demo.ShoppingConfiguration;
 import com.example.demo.Entitity.AddtoCart;
-import com.example.demo.Entitity.CheckoutCart;
+
 import com.example.demo.Entitity.Products;
-import com.example.demo.Entitity.ShoppingHIstoy;
+
 import com.example.demo.Entitity.Shoppingcart;
 import com.example.demo.Entitity.User;
-import com.example.demo.Entitity.Users;
-import com.example.demo.dao.ShoppingDao;
+
+
 import com.example.demo.services.CartService;
 import com.example.demo.services.ShoppingcartServices;
 
@@ -198,16 +192,6 @@ public class Mycontroller {
 	
 //	Order Controllers
 	
-	@GetMapping("/getOrdersByUserId")
-	public ResponseEntity<?> getOrdersByUserId(@RequestBody HashMap<String,String> ordersRequest) {
-	try {
-		return ResponseEntity.ok(new ApiResponse());
-	}catch(Exception e) {
-		e.printStackTrace();
-		return ResponseEntity.badRequest().body(new ApiResponse());
-	}
-	
-}
 	
 	
 	

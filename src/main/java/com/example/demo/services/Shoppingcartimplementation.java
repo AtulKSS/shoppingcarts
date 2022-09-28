@@ -1,31 +1,17 @@
 package com.example.demo.services;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.TreeSet;
-
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Entitity.AddtoCart;
-//import com.example.demo.Entitity.CheckoutCart;
+
 import com.example.demo.Entitity.Products;
-//import com.example.demo.Entitity.ShoppingHIstoy;
+
 import com.example.demo.Entitity.Shoppingcart;
 import com.example.demo.Entitity.User;
-//import com.example.demo.Entitity.Users;
+
 import com.example.demo.dao.AddToCartRepo;
 import com.example.demo.dao.ProductRepo;
 import com.example.demo.dao.ShoppingDao;
@@ -114,22 +100,12 @@ public class Shoppingcartimplementation implements ShoppingcartServices {
 		return priceList;
 	}
 	
-	
-
 	@Override
 	public List<String> getAllitems() {
 		List<String> priceAllitems = shoppingdao.getAllitems();
 		return priceAllitems;
 	}
 
-	@Override
-	public List<Shoppingcart> getinfo(Long price) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-
-	
 	@Override
 	public HttpStatus deletecart(String string, HttpStatus ok) {
 		HttpStatus shoppingcart = ok;
@@ -151,8 +127,6 @@ public class Shoppingcartimplementation implements ShoppingcartServices {
 		return product;
 	}
 
-
-
 	@Override
 	public AddtoCart addtocart(AddtoCart addtocart) {
 		// TODO Auto-generated method stub
@@ -162,13 +136,8 @@ public class Shoppingcartimplementation implements ShoppingcartServices {
 	
 	@Override
 	public String getallusersss() {
-		// TODO Auto-generated method stub\
 		String getalluserss = userdao.getallusers();
 		return getalluserss;
 	}
-
-
-
-
 
 }

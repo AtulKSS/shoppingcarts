@@ -18,9 +18,9 @@ public class ProductServices {
 	public List<Products>getAllProducts(){
 		return productRepo.findAll();
 	}
-	public List<Products>getProductsByCategory(String product_id){
-		return productRepo.getByCategoryId(product_id);
-	}
+//	public List<Products>getProductsByCategory(String product_id){
+//		return productRepo.getByCategoryId(product_id);
+//	}
 	
 	public Products getProductsById(long productId) throws Exception {
 		return productRepo.findById(productId).orElseThrow(() ->new Exception("Product is not found"));

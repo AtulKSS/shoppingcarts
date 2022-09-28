@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Entitity.AddtoCart;
 import com.example.demo.Entitity.Products;
-import com.example.demo.controller.ProductServices;
+
 import com.example.demo.dao.AddToCartRepo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import ch.qos.logback.classic.Logger;
+
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Service
 public class CartSerivceImpl implements CartService {
@@ -58,31 +58,39 @@ public class CartSerivceImpl implements CartService {
 		return addCartRepo.getCartByuserId(userId);
 	}
 
-	@Override
-	public List<AddtoCart> removeCartByUserId(long cartId, long userId) {
-		addCartRepo.deleteCartByIdAndUserId(userId, cartId);
-		return this.getCartByUserId(userId);
-	}
+//	@Override
+//	public List<AddtoCart> removeCartByUserId(long cartId, long userId) {
+//		addCartRepo.deleteCartByIdAndUserId(userId, cartId);
+//		return this.getCartByUserId(userId);
+//	}
 
 	@Override
 	public void updateQtyByCartId(long cartId, int qty, double price) throws Exception {
 		addCartRepo.updateQtyByCartId(cartId,price,qty);
 	}
 
+	
+//	@Override
+//	public List<AddtoCart> removeAllCartByUserId(long userId) {
+//		addCartRepo.deleteAllCartByUserId(userId);
+//		return null;
+//	}
+
 	@Override
-	public Boolean checkTotalAmountAgainstCart(double totalAmount,long userId) {
-		double total_amount =addCartRepo.getTotalAmountByUserId(userId);
-		if(total_amount == totalAmount) {
-			return true;
-		}
-		System.out.print("Error from request "+total_amount +" --db-- "+ totalAmount);
-		return false;
+	public Boolean checkTotalAmountAgainstCart(double totalAmount, long userId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	
+	@Override
+	public List<AddtoCart> removeCartByUserId(long cartId, long userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public List<AddtoCart> removeAllCartByUserId(long userId) {
-		addCartRepo.deleteAllCartByUserId(userId);
+		// TODO Auto-generated method stub
 		return null;
 	}
 
