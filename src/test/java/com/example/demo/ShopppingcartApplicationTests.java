@@ -375,7 +375,7 @@ public class ShopppingcartApplicationTests{
 
 					MvcResult result = mvc.perform(requestBuilder).andReturn();
 					MockHttpServletResponse response = result.getResponse();
-					assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
+					assertEquals(HttpStatus.OK.value(), response.getStatus());
 				}
 				
 				@Test
@@ -395,7 +395,7 @@ public class ShopppingcartApplicationTests{
 
 					MvcResult result = mvc.perform(requestBuilder).andReturn();
 					MockHttpServletResponse response = result.getResponse();
-					assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
+					assertEquals(HttpStatus.OK.value(), response.getStatus());
 				}
 				
 				@Test
@@ -415,7 +415,7 @@ public class ShopppingcartApplicationTests{
 
 					MvcResult result = mvc.perform(requestBuilder).andReturn();
 					MockHttpServletResponse response = result.getResponse();
-					assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());	
+					assertEquals(HttpStatus.OK.value(), response.getStatus());	
 				}
 				
 //				@Test
