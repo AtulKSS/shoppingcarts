@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import java.util.HashMap;
-
 public class ShoppingConfiguration {
 
 //	public static Boolean validationWithHashMap(String keys[],HashMap<String,String> request) throws Exception{

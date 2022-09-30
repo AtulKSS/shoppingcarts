@@ -56,10 +56,7 @@ public class ShopppingcartApplicationTests{
 				
 				@MockBean
 				private AddToCartRepo addtocartrepo;
-				
-			
-			
-				
+	
 				@Autowired
 				private ShoppingDao shoppingdao;
 				 
@@ -92,12 +89,7 @@ public class ShopppingcartApplicationTests{
 					return objectmapper.writeValueAsString(object);
 				}
 				
-				//TESTING FOR PUT METHOD
-				
-				
-				
-				
-				
+				//TESTING FOR PUT METHOD	
 				@Test
 				public void testadduser()
 				throws Exception{
