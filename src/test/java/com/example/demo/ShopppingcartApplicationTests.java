@@ -331,7 +331,7 @@ public class ShopppingcartApplicationTests{
 				
 					MvcResult result = mvc.perform(requestBuilder).andReturn();
 					MockHttpServletResponse response = result.getResponse();
-					assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getStatus());				
+					assertEquals(HttpStatus.OK.value(), response.getStatus());				
 				}
 							
 				@Test
