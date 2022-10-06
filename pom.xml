@@ -17,6 +17,17 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
+		<sonar.login>admin</sonar.login>
+		<sonar.password>Atul</sonar.password>
+		<sonar.coverage.jacoco.xmlReportPaths>target/coverage-report/jacoco.xm1</sonar.coverage.jacoco.xmlReportPaths>
+		<sonar.java.binaries>target/classes</sonar.java.binaries>
+		<sonar.sources>src/main/java/</sonar.sources>
+		<sonar.tests>src/test/java/</sonar.tests>
+		<sonar.verbose>true</sonar.verbose>
+		<sonar.log.level>true</sonar.log.level>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+			
 	</properties>
 	
 	
@@ -44,6 +55,12 @@
         <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
 
+	<dependency>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-compiler-plugin</artifactId>
+  <version>3.10.1</version>
+  <type>maven-plugin</type>
+</dependency>
 	
 	<dependency>
     <groupId>io.springfox</groupId>
@@ -115,10 +132,17 @@
                 </executions>
             </plugin>
 			
-			
+		<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.19.1</version>
+    <configuration>
+        <testFailureIgnore>true</testFailureIgnore>
+    </configuration>
+</plugin>
 	
 				                    
-		</plugins>
+		</plugins>		
 	</build>
 	
 
